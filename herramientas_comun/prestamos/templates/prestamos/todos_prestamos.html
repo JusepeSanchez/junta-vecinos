@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Gestión de préstamos{% endblock %}
+{% block content %}
+<h1>Gestión de préstamos</h1>
+<table><thead><tr><th>Socio</th><th>Herramienta</th><th>Solicitud</th><th>Devolución esperada</th><th>Devolución real</th><th>Estado</th><th>Acciones</th></tr></thead>
+<tbody>{% for prestamo in prestamos %}<tr>
+    <td>{{ prestamo.socio }}</td><td>{{ prestamo.herramienta }}</td><td>{{ prestamo.fecha_solicitud }}</td>
+    <td>{{ prestamo.fecha_devolucion_esperada }}</td><td>{{ prestamo.fecha_devolucion_real|default:"—" }}</td><td>{{ prestamo.get_estado_display }}</td>
+    <td>{% if prestamo.estado == "Pendiente" %}
+        <form method="post" action="{% url 'activar_prestamo' prestamo.pk %}">{% csrf_token %}<button type="submit">Activar</button></form>
+    {% elif prestamo.estado == "Activo" %}
+        <form method="post" action="{% url 'registrar_devolucion' prestamo.pk %}">{% csrf_token %}<button type="submit">Registrar devolución</button></form>
+    {% endif %}</td>
+</tr>{% empty %}<tr><td colspan="7">No hay préstamos registrados.</td></tr>{% endfor %}</tbody></table>
+{% endblock %}

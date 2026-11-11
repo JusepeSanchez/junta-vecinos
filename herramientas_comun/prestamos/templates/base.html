@@ -23,6 +23,7 @@
         {% if user.is_staff %}
             <a href="{% url 'herramienta_list' %}">Herramientas</a>
             <a href="{% url 'categoria_list' %}">Categorías</a>
+            <a href="{% url 'todos_prestamos' %}">Gestión de préstamos</a>
         {% endif %}
         <span>Conectado: {{ user.get_full_name|default:user.username }}</span>
         <form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}

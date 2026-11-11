@@ -208,3 +208,60 @@ def confirmar_solicitud(request):
 def mis_prestamos(request):
     prestamos = Prestamo.objects.filter(socio=request.user).select_related('herramienta')
     return render(request, 'prestamos/mis_prestamos.html', {'prestamos': prestamos})
+
+
+@login_required
+@require_POST
+def cancelar_prestamo(request, pk):
+    with transaction.atomic():
+        prestamo = get_object_or_404(
+            Prestamo.objects.select_for_update(), pk=pk, socio=request.user
+        )
+        if prestamo.estado != Prestamo.Estado.PENDIENTE:
+            messages.error(request, 'Solo puedes cancelar préstamos pendientes.')
+        else:
+            prestamo.estado = Prestamo.Estado.CANCELADO
+            prestamo.save(update_fields=['estado'])
+            herramienta = Herramienta.objects.select_for_update().get(pk=prestamo.herramienta_id)
+            herramienta.disponible = True
+            herramienta.save(update_fields=['disponible'])
+            messages.success(request, 'Préstamo cancelado; la herramienta está disponible.')
+    return redirect('mis_prestamos')
+
+
+@encargado_requerido
+def todos_prestamos(request):
+    prestamos = Prestamo.objects.select_related('socio', 'herramienta')
+    return render(request, 'prestamos/todos_prestamos.html', {'prestamos': prestamos})
+
+
+@encargado_requerido
+@require_POST
+def activar_prestamo(request, pk):
+    with transaction.atomic():
+        prestamo = get_object_or_404(Prestamo.objects.select_for_update(), pk=pk)
+        if prestamo.estado != Prestamo.Estado.PENDIENTE:
+            messages.error(request, 'Solo se pueden activar préstamos pendientes.')
+        else:
+            prestamo.estado = Prestamo.Estado.ACTIVO
+            prestamo.save(update_fields=['estado'])
+            messages.success(request, 'Préstamo activado correctamente.')
+    return redirect('todos_prestamos')
+
+
+@encargado_requerido
+@require_POST
+def registrar_devolucion(request, pk):
+    with transaction.atomic():
+        prestamo = get_object_or_404(Prestamo.objects.select_for_update(), pk=pk)
+        if prestamo.estado != Prestamo.Estado.ACTIVO:
+            messages.error(request, 'Solo se puede registrar la devolución de un préstamo activo.')
+        else:
+            prestamo.estado = Prestamo.Estado.DEVUELTO
+            prestamo.fecha_devolucion_real = timezone.localdate()
+            prestamo.save(update_fields=['estado', 'fecha_devolucion_real'])
+            herramienta = Herramienta.objects.select_for_update().get(pk=prestamo.herramienta_id)
+            herramienta.disponible = True
+            herramienta.save(update_fields=['disponible'])
+            messages.success(request, 'Devolución registrada; la herramienta está disponible.')
+    return redirect('todos_prestamos')
