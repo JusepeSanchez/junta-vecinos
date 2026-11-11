@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Herramientas{% endblock %}
+{% block content %}
+<h1>Herramientas</h1>
+<div class="toolbar"><a class="button" href="{% url 'herramienta_create' %}">Nueva herramienta</a></div>
+<form class="toolbar" method="get">
+    <input type="search" name="q" value="{{ busqueda }}" placeholder="Buscar por nombre">
+    <select name="categoria">
+        <option value="">Todas las categorías</option>
+        {% for categoria in categorias %}<option value="{{ categoria.pk }}" {% if categoria_seleccionada == categoria.pk|stringformat:"s" %}selected{% endif %}>{{ categoria.nombre }}</option>{% endfor %}
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+<table><thead><tr><th>Código</th><th>Nombre</th><th>Categoría</th><th>Estado</th><th>Disponible</th><th>Acciones</th></tr></thead>
+<tbody>{% for herramienta in herramientas %}<tr>
+    <td>{{ herramienta.codigo }}</td><td>{{ herramienta.nombre }}</td><td>{{ herramienta.categoria }}</td>
+    <td>{{ herramienta.get_estado_display }}</td><td>{{ herramienta.disponible|yesno:"Sí,No" }}</td>
+    <td><a href="{% url 'herramienta_detail' herramienta.pk %}">Detalle</a> · <a href="{% url 'herramienta_edit' herramienta.pk %}">Editar</a> · <a href="{% url 'herramienta_delete' herramienta.pk %}">Eliminar</a></td>
+</tr>{% empty %}<tr><td colspan="6">No hay herramientas que coincidan.</td></tr>{% endfor %}</tbody></table>
+{% endblock %}

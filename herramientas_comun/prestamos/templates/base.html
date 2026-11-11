@@ -17,6 +17,10 @@
 <header>
     <a href="{% url 'inicio' %}"><strong>Herramientas en Común</strong></a>
     {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <a href="{% url 'herramienta_list' %}">Herramientas</a>
+            <a href="{% url 'categoria_list' %}">Categorías</a>
+        {% endif %}
         <span>Conectado: {{ user.get_full_name|default:user.username }}</span>
         <form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}
             <button type="submit">Cerrar sesión</button>
