@@ -1,0 +1,20 @@
+[
+  {"model":"prestamos.categoria","pk":1,"fields":{"nombre":"Jardinería","descripcion":"Herramientas para mantención de jardines y áreas verdes."}},
+  {"model":"prestamos.categoria","pk":2,"fields":{"nombre":"Construcción","descripcion":"Herramientas manuales para reparaciones y construcción."}},
+  {"model":"prestamos.categoria","pk":3,"fields":{"nombre":"Electricidad","descripcion":"Herramientas para trabajos eléctricos básicos."}},
+  {"model":"prestamos.herramienta","pk":1,"fields":{"codigo":"HER-001","nombre":"Pala punta huevo","categoria":1,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-10"}},
+  {"model":"prestamos.herramienta","pk":2,"fields":{"codigo":"HER-002","nombre":"Rastrillo metálico","categoria":1,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-10"}},
+  {"model":"prestamos.herramienta","pk":3,"fields":{"codigo":"HER-003","nombre":"Tijera de podar","categoria":1,"estado":"Regular","disponible":true,"fecha_ingreso":"2026-01-11"}},
+  {"model":"prestamos.herramienta","pk":4,"fields":{"codigo":"HER-004","nombre":"Manguera 20 metros","categoria":1,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-11"}},
+  {"model":"prestamos.herramienta","pk":5,"fields":{"codigo":"HER-005","nombre":"Carretilla","categoria":1,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-12"}},
+  {"model":"prestamos.herramienta","pk":6,"fields":{"codigo":"HER-006","nombre":"Azadón","categoria":1,"estado":"Regular","disponible":true,"fecha_ingreso":"2026-01-12"}},
+  {"model":"prestamos.herramienta","pk":7,"fields":{"codigo":"HER-007","nombre":"Martillo carpintero","categoria":2,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-13"}},
+  {"model":"prestamos.herramienta","pk":8,"fields":{"codigo":"HER-008","nombre":"Serrucho manual","categoria":2,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-13"}},
+  {"model":"prestamos.herramienta","pk":9,"fields":{"codigo":"HER-009","nombre":"Taladro percutor","categoria":2,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-14"}},
+  {"model":"prestamos.herramienta","pk":10,"fields":{"codigo":"HER-010","nombre":"Nivel de burbuja","categoria":2,"estado":"Regular","disponible":true,"fecha_ingreso":"2026-01-14"}},
+  {"model":"prestamos.herramienta","pk":11,"fields":{"codigo":"HER-011","nombre":"Llave inglesa","categoria":2,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-15"}},
+  {"model":"prestamos.herramienta","pk":12,"fields":{"codigo":"HER-012","nombre":"Alicate universal","categoria":3,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-15"}},
+  {"model":"prestamos.herramienta","pk":13,"fields":{"codigo":"HER-013","nombre":"Multímetro digital","categoria":3,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-16"}},
+  {"model":"prestamos.herramienta","pk":14,"fields":{"codigo":"HER-014","nombre":"Destornillador aislado","categoria":3,"estado":"Regular","disponible":true,"fecha_ingreso":"2026-01-16"}},
+  {"model":"prestamos.herramienta","pk":15,"fields":{"codigo":"HER-015","nombre":"Pelacables","categoria":3,"estado":"Bueno","disponible":true,"fecha_ingreso":"2026-01-17"}}
+]
