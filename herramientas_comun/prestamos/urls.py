@@ -16,4 +16,10 @@ urlpatterns = [
     path('categorias/nueva/', views.categoria_create, name='categoria_create'),
     path('categorias/<int:pk>/editar/', views.categoria_edit, name='categoria_edit'),
     path('categorias/<int:pk>/eliminar/', views.categoria_delete, name='categoria_delete'),
+    path('catalogo/', views.catalogo, name='catalogo'),
+    path('solicitud/', views.ver_solicitud, name='ver_solicitud'),
+    path('solicitud/agregar/<int:pk>/', views.agregar_solicitud, name='agregar_solicitud'),
+    path('solicitud/quitar/<int:pk>/', views.quitar_solicitud, name='quitar_solicitud'),
+    path('solicitud/confirmar/', views.confirmar_solicitud, name='confirmar_solicitud'),
+    path('mis-prestamos/', views.mis_prestamos, name='mis_prestamos'),
 ]

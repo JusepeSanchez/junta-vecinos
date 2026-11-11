@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Mi solicitud{% endblock %}
+{% block content %}
+<h1>Mi solicitud</h1>
+<table><thead><tr><th>Herramienta</th><th>Categoría</th><th></th></tr></thead>
+<tbody>{% for herramienta in herramientas %}<tr>
+    <td>{{ herramienta.codigo }} — {{ herramienta.nombre }}</td><td>{{ herramienta.categoria }}</td>
+    <td><form method="post" action="{% url 'quitar_solicitud' herramienta.pk %}">{% csrf_token %}<button class="danger" type="submit">Quitar</button></form></td>
+</tr>{% empty %}<tr><td colspan="3">Tu solicitud está vacía.</td></tr>{% endfor %}</tbody></table>
+{% if herramientas %}<form method="post" action="{% url 'confirmar_solicitud' %}" class="toolbar">{% csrf_token %}<button type="submit">Confirmar solicitud</button></form>{% endif %}
+{% endblock %}

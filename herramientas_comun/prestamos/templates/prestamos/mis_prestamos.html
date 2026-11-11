@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Mis préstamos{% endblock %}
+{% block content %}
+<h1>Mis préstamos</h1>
+<table><thead><tr><th>Herramienta</th><th>Solicitud</th><th>Devolución esperada</th><th>Estado</th></tr></thead>
+<tbody>{% for prestamo in prestamos %}<tr>
+    <td>{{ prestamo.herramienta }}</td><td>{{ prestamo.fecha_solicitud }}</td>
+    <td>{{ prestamo.fecha_devolucion_esperada }}</td><td>{{ prestamo.get_estado_display }}</td>
+</tr>{% empty %}<tr><td colspan="4">Aún no tienes préstamos.</td></tr>{% endfor %}</tbody></table>
+{% endblock %}
