@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Herramientas en Común{% endblock %}</title>
+    <style>
+        body { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; color: #23332d; background: #f4f6f2; }
+        header, main { background: white; padding: 1.25rem; border-radius: .6rem; }
+        header { background: #214f3a; color: white; }
+        header a { color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+<header><a href="{% url 'inicio' %}"><strong>Herramientas en Común</strong></a></header>
+<main>{% block content %}{% endblock %}</main>
+</body>
+</html>
