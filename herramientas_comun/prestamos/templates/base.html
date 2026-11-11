@@ -8,11 +8,26 @@
         body { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; color: #23332d; background: #f4f6f2; }
         header, main { background: white; padding: 1.25rem; border-radius: .6rem; }
         header { background: #214f3a; color: white; }
-        header a { color: white; text-decoration: none; }
+        header a { color: white; text-decoration: none; margin-right: 1rem; }
+        button { font: inherit; padding: .5rem .7rem; border: 0; border-radius: .35rem; background: #53645b; color: white; cursor: pointer; }
+        form.inline { display: inline; }
     </style>
 </head>
 <body>
-<header><a href="{% url 'inicio' %}"><strong>Herramientas en Común</strong></a></header>
-<main>{% block content %}{% endblock %}</main>
+<header>
+    <a href="{% url 'inicio' %}"><strong>Herramientas en Común</strong></a>
+    {% if user.is_authenticated %}
+        <span>Conectado: {{ user.get_full_name|default:user.username }}</span>
+        <form class="inline" method="post" action="{% url 'logout' %}">{% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+    {% endif %}
+</header>
+<main>
+    {% if messages %}{% for message in messages %}<p>{{ message }}</p>{% endfor %}{% endif %}
+    {% block content %}{% endblock %}
+</main>
 </body>
 </html>
